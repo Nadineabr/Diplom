@@ -20,6 +20,16 @@ let slideIndex = 1,
 		};		
 		slides[slideIndex - 1].style.display = 'block';
 
+		if (n > feedbackSlides.length) {
+			slideIndex = 1;
+		};
+		if (n < 1) {
+			slideIndex = feedbackSlides.length;
+		};
+		for (let i = 0; i < feedbackSlides.length; i++) {
+			feedbackSlides[i].style.display = 'none';
+		};		
+		feedbackSlides[slideIndex - 1].style.display = 'block';
 	}
 
 	function plusSlides (n) {
@@ -33,18 +43,6 @@ let slideIndex = 1,
 	}
 	setInterval(nextSlide, 5000)
 
-	function showSlides(n) {
-		if (n > feedbackSlides.length) {
-			slideIndex = 1;
-		};
-		if (n < 1) {
-			slideIndex = feedbackSlides.length;
-		};
-		for (let i = 0; i < feedbackSlides.length; i++) {
-			feedbackSlides[i].style.display = 'none';
-		};		
-		feedbackSlides[slideIndex - 1].style.display = 'block';
-	}
 	prev.addEventListener('click', function () {
       plusSlides(-1);
     });
@@ -206,8 +204,8 @@ moreStyles.addEventListener('click', (event) => {
 
 
  //Calc
-    let size = document.getElementById('#size'),
-        material = document.getElementById('#material'),
+    let size = document.getElementById('size'),
+        material = document.getElementById('material'),
         opt = document.getElementById('options'),
         totalValue = document.getElementsByClassName('calc-price')[0],
         sizeSum = 0,
@@ -259,3 +257,4 @@ moreStyles.addEventListener('click', (event) => {
       
       }
     });
+console.log(materialSum)
