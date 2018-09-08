@@ -121,8 +121,6 @@ modals.addEventListener('submit', (event) => {
 		event.preventDefault();
 	 	target.appendChild(statusMessage);
 
-
-	
  		
 	let request =  new XMLHttpRequest();
 	request.open("POST", "server.php")
@@ -152,9 +150,6 @@ modals.addEventListener('submit', (event) => {
 		for (let i=0; i < input.length; i++) {
 			input[i].value = "";
 		}
-	
-	
-
 }
 });
 
@@ -207,22 +202,23 @@ moreStyles.addEventListener('click', (event) => {
         material = document.getElementById('material'),
         opt = document.getElementById('options'),
         totalValue = document.getElementsByClassName('calc-price')[0],
+        promocode = document.getElementsByClassName('promocode'),
         sizeSum = 0,
         materialSum = 0,
         total = 0;
     totalValue.innerHTML = "Для  расчета нужно выбрать размер картины и материал картины";
 
     size.addEventListener('change', function () {
-    	// for (let i = 1; i < size.option.length; i++) {
     	sizeSum = +this.options[this.selectedIndex].value;
      	total = (materialSum + sizeSum);
 
-      if (material.options.value == material.options[0].value || size.options.value == size.options[0].value || typeof(sizeSum) === "string" || typeof(materialSum) === "string") {
+      if (material.options.value == material.options[0].value || size.options.value == "") {
         totalValue.innerHTML = "введите";
+       	material.options.value = 0;
+        size.options.value = 0;
       } else {
         totalValue.innerHTML = total;
       }
-    	// }
      
     });
     material.addEventListener('change', function () {
@@ -231,29 +227,34 @@ moreStyles.addEventListener('click', (event) => {
 
       if (size.options.value == size.options[0].value || material.options.value == material.options[0].value) {
         totalValue.innerHTML = "введите";
+        material.options.value = 0;
+        size.options.value = 0;
         
       } else {
         totalValue.innerHTML = total;
       }
     });
     opt.addEventListener('change', function () {
-      if (material.options.value == material.options[0].value || size.options.value == size.options[0].value) {
+      if (material.options.value == material.options[0].value && size.options.value == size.options[0].value) {
         totalValue.innerHTML = "введите";
+       material.options.value = 0;
+        size.options.value = 0;
         
       } else {
-        var a = total;
+        let a = total;
         totalValue.innerHTML = a * this.options[this.selectedIndex].value;
       }
     });
-    size.addEventListener('change', function () {
-      if (size.options.value == size.options[0].value || material.options.value == material.options[0].value) {
-        totalValue.innerHTML = 0;
+
+    totalValue.addEventListener('change', () => {
+      if (promocode.value == "IWANTPOPART") {
+      	totalValue.innerHTML = totalValue - total.value * 0.3;
+   console.log(promocode.value)
+
       }
     });
-    material.addEventListener('change', function () {
-      if (material.options.value == material.options[0].value || size.options.value == size.options[0].value) {
-        totalValue.innerHTML = "введите";
-      
-      }
-    });
-console.log(materialSum)
+  
+
+
+
+  
