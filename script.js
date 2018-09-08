@@ -121,8 +121,8 @@ modals.addEventListener('submit', (event) => {
 		event.preventDefault();
 	 	target.appendChild(statusMessage);
 
-for (let i=0; i < inputsName.length; i++) {
-	if (inputsName[i].value.match(reg) && comment.value.match(reg)) {
+
+	
  		
 	let request =  new XMLHttpRequest();
 	request.open("POST", "server.php")
@@ -139,12 +139,12 @@ for (let i=0; i < inputsName.length; i++) {
 		} else if (request.readyState === 4){
 			if (request.status == 200 && request.status < 300) {
 				for (let i=0; i < form.length; i++) {
-					form[i].innerHTML = message.success;
+					statusMessage.innerHTML = message.success;
 					}
 			} else {
 				statusMessage.innerHTML = message.failure;
 				for (let i=0; i < form.length; i++) {
-					form[i].innerHTML = message.failure;
+					statusMessage.innerHTML = message.failure;
 				}
 			}
 		}
@@ -152,11 +152,10 @@ for (let i=0; i < inputsName.length; i++) {
 		for (let i=0; i < input.length; i++) {
 			input[i].value = "";
 		}
-	} else {
-		inputsName[i].value = "";
- 	 	comment.value = ""
-	}
-}}
+	
+	
+
+}
 });
 
 
