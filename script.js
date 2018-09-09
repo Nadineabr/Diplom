@@ -336,7 +336,6 @@ for (let i=0; i < portfolioBlock.length; i++) {
 filter();
 
 //show image
-//докрутить исчезновение текста и тап
 function showImage() {
 let sizesWrapper = document.getElementsByClassName('sizes-wrapper')[0];
 let sizesBlock = document.querySelectorAll('.sizes-block');
@@ -345,6 +344,7 @@ let img2 = document.querySelector('.size-2');
 let img3 = document.querySelector('.size-3');
 let img4 = document.querySelector('.size-4');
 let imgChange = document.getElementsByTagName('img');
+let sizeHide = document.querySelectorAll('.size-hide');
 
 for (let i = 0; i < sizesBlock.length; i++) {
 sizesBlock[i].onmouseover = function(e) {
@@ -354,6 +354,7 @@ sizesBlock[i].onmouseover = function(e) {
 		target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
 		target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
 		target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
+		sizeHide[i].style.display = 'none'
 	}
 }
 	sizesBlock[i].onmouseout = function(e) {
@@ -363,8 +364,9 @@ sizesBlock[i].onmouseover = function(e) {
 		target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
 		target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
 		target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
-		}
+		sizeHide[i].style.display = 'block'
 	}
+}
 	sizesBlock[i].touchstart = function(e) {
 	let target = e.target;
 	if (target && target.nodeName == "IMG") {
@@ -372,15 +374,16 @@ sizesBlock[i].onmouseover = function(e) {
 		target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
 		target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
 		target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
+		sizeHide[i].style.display = 'none'
 	}
 	if (target.node.nodeName == "DIV") {
 		target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
 		target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
 		target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
 		target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
+		sizeHide[i].style.display = 'block'
 	}
 }
-
   };
 }
 
@@ -414,20 +417,52 @@ accordionHeading.forEach(function(item, i, accordionHeading) {
 accordion();
 
 //gift
-popupGift = document.querySelector('.popup-gift'),
+function gift() {
+	let popupGift = document.querySelector('.popup-gift'),
 	close = document.querySelector('.popup-close'),
-	gift = document.querySelector('.fixed-gift');
-	//пользователь долистал до конца страницы
-document.addEventListener('scroll', event =>{
-  const endScrollTop = document.documentElement.scrollHeight-document.documentElement.clientHeight;
+	gift = document.querySelector('.fixed-gift'),
+	body = document.getElementsByTagName('body')[0];
+	
+function makeCounter() {
+  let currentCount = 0;
+  return function() {
+    return currentCount++;
+  };
+}
 
-  if(endScrollTop === document.documentElement.scrollTop){
-    popupGift.style.display = 'block';
-    gift.style.display = 'none';
-	document.body.style.overflow = 'hidden';
+let counter = makeCounter();
 
-  }
-})
+body.addEventListener('click', (e) => {
+	let a = counter()
+  console.log(a)
+});
+	//пользователь долистал до конца страницы и никуда не кликнуд
+	document.addEventListener('scroll', (event) =>{
+	  const endScrollTop = document.documentElement.scrollHeight-document.documentElement.clientHeight;
+	  if(endScrollTop === document.documentElement.scrollTop) {
+	    popupGift.style.display = 'block';
+	    gift.style.display = 'none';
+		document.body.style.overflow = 'hidden';
+	  }
+	})
+}
+gift();
+
+//time
+function time() {
+
+	let popupGift = document.querySelector('.popup-gift'),
+		close = document.querySelector('.popup-close'),
+		gift = document.querySelector('.fixed-gift'),
+		body = document.getElementsByTagName('body')[0];
+	setTimeout(() => {
+		popupGift.style.display = 'block';
+		gift.style.display = 'none';
+		document.body.style.overflow = 'hidden';
+	 }, 60000) 
+}
+time();
+
 	
 
 
