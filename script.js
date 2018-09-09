@@ -448,28 +448,25 @@ function gift() {
 	close = document.querySelector('.popup-close'),
 	gift = document.querySelector('.fixed-gift'),
 	body = document.getElementsByTagName('body')[0];
-	
-function makeCounter() {
   let currentCount = 0;
-  return function() {
-    return currentCount++;
-  };
-}
+	
 
-let counter = makeCounter();
 
 body.addEventListener('click', (e) => {
-	let a = counter()
-  console.log(a)
+	if (e.target.tagName == "BUTTON" || e.target == popupGift)
+		currentCount++
 });
-	//пользователь долистал до конца страницы и никуда не кликнуд
+	//пользователь долистал до конца страницы и никуда не кликнул
 	document.addEventListener('scroll', (event) =>{
 	  const endScrollTop = document.documentElement.scrollHeight-document.documentElement.clientHeight;
-	  if(endScrollTop === document.documentElement.scrollTop) {
+	  if(endScrollTop === document.documentElement.scrollTop && currentCount == 0) {
 	    popupGift.style.display = 'block';
 	    gift.style.display = 'none';
 		document.body.style.overflow = 'hidden';
+
 	  }
+	console.log(currentCount)
+
 	})
 }
 gift();
@@ -503,6 +500,25 @@ function burger() {
 	burgerBtn.addEventListener('click', (e) => {
 		if(width <= 768) {
 			burgerMenu.style.display = "block";
+			if (e.target == burgerBtn &&  burgerMenu.style.display == "block") {
+				burgerMenu.style.display = "none"
+			}
+			else{
+				burgerMenu.style.display = "block"
+			}
+		} 
+
+	})
+
+	burgerBtn.addEventListener('touchstart', (e) => {
+		if(width <= 768) {
+			burgerMenu.style.display = "block";
+			if (e.target == burgerBtn &&  burgerMenu.style.display == "block") {
+				burgerMenu.style.display = "none"
+			}
+			else{
+				burgerMenu.style.display = "block"
+			}
 		} 
 	})
 	window.addEventListener('resize', function (event) {
