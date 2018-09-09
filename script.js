@@ -1,7 +1,6 @@
 //top slider
 window.addEventListener("DOMContentLoaded", () => {
 
-
 function mainSlider() {
 	let slideIndex = 1,
         slides = document.getElementsByClassName('main-slider-item');
@@ -26,6 +25,9 @@ function showSlides(n) {
 	}, 5000)
 }
 mainSlider();
+
+
+
 
 //down slider
 function feedBackSlider() {
@@ -136,6 +138,9 @@ function popup() {
 }
 popup();
 
+
+
+
 //ajax form
 
 function ajax(){
@@ -189,6 +194,9 @@ modals.addEventListener('submit', (event) => {
 }
 ajax()
 
+
+
+
 // more posts
 
 function morePosts(){
@@ -212,6 +220,9 @@ newBlocks.forEach((element) => {
 });
 }
 morePosts();
+
+
+
 
  //Calc
  function calc(){
@@ -290,6 +301,10 @@ morePosts();
 }
 calc();
 
+
+
+
+
 //фильтрация
 function filter() {
 let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0];
@@ -334,6 +349,10 @@ for (let i=0; i < portfolioBlock.length; i++) {
 }); 
 }
 filter();
+
+
+
+
 
 //show image
 function showImage() {
@@ -382,12 +401,16 @@ sizesBlock[i].onmouseover = function(e) {
 		target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
 		target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
 		sizeHide[i].style.display = 'block'
+		}
 	}
-}
   };
 }
 
 showImage();
+
+
+
+
 
 //accordion
 function accordion(){
@@ -415,6 +438,9 @@ accordionHeading.forEach(function(item, i, accordionHeading) {
 });
 }
 accordion();
+
+
+
 
 //gift
 function gift() {
@@ -448,22 +474,45 @@ body.addEventListener('click', (e) => {
 }
 gift();
 
+
+
+
+
 //time
 function time() {
 
-	let popupGift = document.querySelector('.popup-gift'),
+	let popupConsult = document.querySelector('.popup-consultation'),
 		close = document.querySelector('.popup-close'),
-		gift = document.querySelector('.fixed-gift'),
 		body = document.getElementsByTagName('body')[0];
 	setTimeout(() => {
-		popupGift.style.display = 'block';
-		gift.style.display = 'none';
+		popupConsult.style.display = 'block';
 		document.body.style.overflow = 'hidden';
 	 }, 60000) 
 }
 time();
 
-	
+
+
+
+	//burger
+function burger() {
+	let burgerBtn = document.querySelector('.burger');
+	let burgerMenu = document.querySelector('.burger-menu');
+	let width = document.body.clientWidth;
+
+	burgerBtn.addEventListener('click', (e) => {
+		if(width <= 768) {
+			burgerMenu.style.display = "block";
+		} 
+	})
+	window.addEventListener('resize', function (event) {
+        if(window.innerWidth > 769){
+            burgerMenu.style.display = 'none';
+        }
+    })
+}
+burger();
+
 
 
                 
