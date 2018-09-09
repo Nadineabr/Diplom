@@ -94,10 +94,10 @@
 			<div class=row>
 				<div class=col-md-7>
 					<div class=main-slider>
-						<div class="main-slider-item wow fadeInDown">
+						<div class="main-slider-item animated slideInDown">
 							<img src=img/main-1.png alt>
 						</div>
-						<div class="main-slider-item wow fadeInDown">
+						<div class="main-slider-item animated slideInDown">
 							<img src=img/main-2.png alt>
 						</div>
 					</div>
@@ -249,7 +249,7 @@
 							<option value="3000" title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
 						</select>
 						<select id=options>
-							<option >Дополнительные услуги</option>
+							<option value="1">Дополнительные услуги</option>
 							<option value="2">Покрытие арт-гелем</option>
 							<option value="3">Экспресс-изготовление</option>
 							<option value="4">Доставка готовых работ </option>
@@ -281,39 +281,39 @@
 			</ul>
 		</div>
 		<div class=portfolio-wrapper>
-			<div class="portfolio-block all girl">
+			<div class="girl portfolio-block all image">
 				<img src=img/portfolio-1.jpg alt>
 			</div>
-			<div class="portfolio-block all girl">
+			<div class="girl portfolio-block all image">
 				<img src=img/portfolio-2.jpg alt>
 			</div>
-			<div class="portfolio-block all lovers">
+			<div class="lovers portfolio-block all image">
 				<img src=img/portfolio-3.jpg alt>
 			</div>
-			<div class="portfolio-block all guy">
+			<div class="guy portfolio-block all image">
 				<img src=img/portfolio-4.jpg alt>
 			</div>
-			<div class="portfolio-block all chef">
+			<div class="chef portfolio-block all  image">
 				<img src=img/portfolio-5.jpg alt>
 			</div>
-			<div class="portfolio-block all lovers">
+			<div class="lovers portfolio-block all  image">
 				<img src=img/portfolio-6.jpg alt>
 			</div>
-			<div class="portfolio-block all lovers">
+			<div class="lovers portfolio-block all  image">
 				<img src=img/portfolio-7.jpg alt>
 			</div>
-			<div class="portfolio-block all girl">
+			<div class="girl portfolio-block all  image">
 				<img src=img/portfolio-8.jpg alt>
 			</div>
-			<div class="portfolio-block all girl">
+			<div class="girl portfolio-block all  image">
 				<img src=img/portfolio-9.jpg alt>
 			</div>
-			<div class="portfolio-block all chef">
+			<div class="chef portfolio-block all  image">
 				<img src=img/portfolio-10.jpg alt>
 			</div>
 		</div>
 		<div class=container>
-			<p class=portfolio-no>Таких портретов мы еще не делали, хотите быть первыми?</p>
+			<p class="portfolio-no no-img">Таких портретов мы еще не делали, хотите быть первыми?</p>
 		</div>
 	</section>
 	<section class=gift>
@@ -498,7 +498,7 @@
 				<button class="main-slider-btn main-next-btn">
 					<img src="img/right-arr.png">
 				</button>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-1.png alt>
@@ -511,7 +511,7 @@
 						<p class=feedback-signature><span>Олег Петров,</span> д. Месягутово</p>
 					</div>
 				</div>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-2.jpg alt>
@@ -524,7 +524,7 @@
 						<p class=feedback-signature><span>Ирина Антонова,</span> г. Кисловодск</p>
 					</div>
 				</div>
-				<div class=feedback-slider-item>
+				<div class="feedback-slider-item animated slideInRight">
 					<div class=col-sm-5>
 						<div class=feedback-block>
 							<img src=img/feedback-3.jpg alt>
@@ -662,9 +662,10 @@
 		<div class=popup-dialog>
 			<div class=popup-content>
 				<button class=popup-close>&times;</button>
-				<h4>Остались вопросы? Закажите обратный звонок</h4>
 				<div class=main-form>
 					<form class=form action=mailer/smart.php method=POST>
+						<h4>Остались вопросы? Закажите обратный звонок</h4>
+
 						<input type=text name=name placeholder="Ваше имя" required>
 						<input type=text name=phone placeholder="Ваш телефон" required>
 						<button class="button button-order">Получить консультацию</button>
@@ -696,10 +697,10 @@
 					</div>
 					<div class=main-form>
 						<div class=form>
-							<input type=text name=name placeholder="Ваше имя" required>
-							<input type=text name=phone placeholder="Ваш телефон" required>
+							<input type=text name=name placeholder="Ваше имя" required class="name-design">
+							<input type=text name=phone placeholder="Ваш телефон" required class="phone-design">
 							<input type=text name=email placeholder="Ваш e-mail">
-							<textarea name=message placeholder=Комментарий rows=2></textarea>
+							<textarea name=message placeholder=Комментарий rows=2 class="comment-design"></textarea>
 							<button class="button button-order">Отправить дизайнеру</button>
 						</div>
 					</div>
@@ -710,6 +711,7 @@
 </div>
 
 	<link rel=stylesheet href=css/bootstrap.css>
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel=stylesheet href=css/main.css>
 	<script src="script.js"></script>
 </body>
