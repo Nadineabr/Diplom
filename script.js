@@ -136,8 +136,9 @@ function popup() {
 }
 popup();
 
-function ajax(){
 //ajax form
+
+function ajax(){
 
 let message = new Object();
 message.loading = "Идет отправка...";
@@ -212,7 +213,6 @@ newBlocks.forEach((element) => {
 }
 morePosts();
 
-
  //Calc
  function calc(){
     let size = document.getElementById('size'),
@@ -237,7 +237,9 @@ morePosts();
       }
      if (promocode.value == "IWANTPOPART") {
       	totalValue.innerHTML = totalValue.innerHTML * 0.7;
-      } else {
+      } else if (material.value == 0 || size.value == 0 ) {
+        totalValue.innerHTML = 0;
+    } else {
         totalValue.innerHTML = total;
       }
     });
@@ -252,7 +254,9 @@ morePosts();
       } 
       if (promocode.value == "IWANTPOPART") {
       	totalValue.innerHTML = totalValue.innerHTML * 0.7;
-      } else {
+      } else if (material.value == 0 || size.value == 0 ) {
+        totalValue.innerHTML = 0;
+    }else {
         totalValue.innerHTML = total;
       }
     });
@@ -263,11 +267,12 @@ morePosts();
         totalValue.innerHTML = 0;
       } else {
         totalValue.innerHTML = total;
-        // totalValue.innerHTML = a * this.options[this.selectedIndex].value;
       }
        if (promocode.value == "IWANTPOPART") {
       	totalValue.innerHTML = totalValue.innerHTML * 0.7;
-      } else {
+      } else if (material.value == 0 || size.value == 0 ) {
+        totalValue.innerHTML = 0;
+    } else {
         totalValue.innerHTML = total;
       }
     });
@@ -275,11 +280,13 @@ morePosts();
       if (promocode.value == "IWANTPOPART") {
       	totalValue.innerHTML = totalValue.innerHTML * 0.7;
 
-     	} else {
+     	} else if (material.value == 0 || size.value == 0 ) {
+        totalValue.innerHTML = 0;
+
+     	}else {
         totalValue.innerHTML = total;
       }
     });
-
 }
 calc();
 
@@ -300,7 +307,6 @@ if (target && target.nodeName == 'LI' ) {
 
 		if (activeFrame.className) {
 			activeFrame.className = activeFrame.className.replace( /(?:^|\s)active(?!\S)/, '' );
-			console.log(activeFrame.className)
 		}
 	}
 	target.classList.toggle('active');
@@ -328,4 +334,115 @@ for (let i=0; i < portfolioBlock.length; i++) {
 }); 
 }
 filter();
+
+//show image
+//докрутить исчезновение текста и тап
+function showImage() {
+let sizesWrapper = document.getElementsByClassName('sizes-wrapper')[0];
+let sizesBlock = document.querySelectorAll('.sizes-block');
+let img1 = document.querySelector('.size-1');
+let img2 = document.querySelector('.size-2');
+let img3 = document.querySelector('.size-3');
+let img4 = document.querySelector('.size-4');
+let imgChange = document.getElementsByTagName('img');
+
+for (let i = 0; i < sizesBlock.length; i++) {
+sizesBlock[i].onmouseover = function(e) {
+	let target = e.target;
+	if (target && target.nodeName == "IMG") {
+		target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
+		target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
+		target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
+		target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
+	}
+}
+	sizesBlock[i].onmouseout = function(e) {
+	let target = e.target;
+	if (target && target.nodeName == "IMG") {
+		target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
+		target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
+		target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
+		target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
+		}
+	}
+	sizesBlock[i].touchstart = function(e) {
+	let target = e.target;
+	if (target && target.nodeName == "IMG") {
+		target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
+		target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
+		target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
+		target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
+	}
+	if (target.node.nodeName == "DIV") {
+		target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
+		target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
+		target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
+		target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
+	}
+}
+
+  };
+}
+
+showImage();
+
+//accordion
+function accordion(){
+let accordionHeading = document.querySelectorAll('often-questions, .accordion-heading');
+let accordionBlock = document.querySelectorAll('.often-questions, .accordion-block');
+
+accordionHeading.__proto__.forEach = [].__proto__.forEach;
+
+var activePanel;
+accordionHeading.forEach(function(item, i, accordionHeading) {
+  item.addEventListener('click', function(e) {
+    //show new ;
+    this.classList.add('ui-accordion-header-active');
+    this.nextElementSibling.classList.remove('accordion-block')
+    this.nextElementSibling.classList.add('activeAnwser');
+    //hide old 
+    if (activePanel) {
+      activePanel.classList.remove('ui-accordion-header-active');
+      activePanel.nextElementSibling.classList.remove('activeAnwser');
+      activePanel.nextElementSibling.classList.add('accordion-block');
+    }
+    //update 
+    activePanel = (activePanel === this) ? 0 : this;
+  });
+});
+}
+accordion();
+
+//gift
+popupGift = document.querySelector('.popup-gift'),
+	close = document.querySelector('.popup-close'),
+	gift = document.querySelector('.fixed-gift');
+	//пользователь долистал до конца страницы
+document.addEventListener('scroll', event =>{
+  const endScrollTop = document.documentElement.scrollHeight-document.documentElement.clientHeight;
+
+  if(endScrollTop === document.documentElement.scrollTop){
+    popupGift.style.display = 'block';
+    gift.style.display = 'none';
+	document.body.style.overflow = 'hidden';
+
+  }
+})
+	
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
 }); 
