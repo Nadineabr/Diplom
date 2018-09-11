@@ -588,15 +588,15 @@
 			</div>
 		</div>
 	</section>
-	<div class="modals">
+	
 
 	<section class=consultation>
-		<div class="container msg">
+		<div class="container">
 			<p class=p-heading>Остались вопросы?</p>
 			<h2>Получите консультацию художника!</h2>
 			<div class="col-md-10 col-md-offset-1">
-				<form class="0 form" action=mailer/smart.php method=POST>
-					<div class=input-wrapper>
+				<form class="form ajax-message" action=mailer/smart.php method=POST>
+					<div class=comment>
 						<input type=text name=name placeholder="Ваше имя" required class="name-design">
 						<input type=text name=phone placeholder="Ваш телефон" required class="phone-design">
 						<input type=text name=email placeholder="Ваш E-mail">
@@ -658,12 +658,13 @@
 			</div>
 		</div>
 	</footer>
+	<div class="modals">
 	<div class=popup-consultation>
 		<div class=popup-dialog>
 			<div class="popup-content msg">
 				<button class=popup-close>&times;</button>
 				<div class=main-form>
-					<form class="1 form" action=mailer/smart.php method=POST>
+					<form class="0 form form-other" action=mailer/smart.php method=POST>
 						<h4>Остались вопросы? Закажите обратный звонок</h4>
 						<input type=text name=name placeholder="Ваше имя" required class="name-design">
 						<input type=text name=phone placeholder="Ваш телефон" required class="phone-design">
@@ -687,7 +688,7 @@
 		<div class=popup-dialog>
 			<div class="popup-content msg">
 				<button class=popup-close>&times;</button>
-				<form class="2 form" action= method=POST enctype=multipart/form-data>
+				<form class="1 form form-other" action= method=POST enctype=multipart/form-data>
 					<h4>Заказать дизайн портрета</h4>
 					<div class=file_uploa>
 						<button type=button>Загрузить фотографию</button>
@@ -699,7 +700,7 @@
 							<input type=text name=name placeholder="Ваше имя" required class="name-design">
 							<input type=text name=phone placeholder="Ваш телефон" required class="phone-design">
 							<input type=text name=email placeholder="Ваш e-mail">
-							<textarea name=message placeholder=Комментарий rows=2 class="comment-design"></textarea>
+							<textarea class=message name=message placeholder=Комментарий rows=2 class="comment-design"></textarea>
 							<button class="button button-order">Отправить дизайнеру</button>
 						</div>
 					</div>

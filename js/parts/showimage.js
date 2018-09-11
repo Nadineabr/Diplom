@@ -30,14 +30,14 @@ function showImage() {
     sizesBlock[i].touchstart = function (e) {
       let target = e.target;
 
-      if (target.tagName == "IMG" || target.tagName == "P") {
+      if (target.tagName == "IMG")  {
         target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
         target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
         target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
         target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
         sizeHide[i].style.display = 'none';
       }
-
+      
       if (target.node.nodeName == "DIV") {
         target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
         target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');

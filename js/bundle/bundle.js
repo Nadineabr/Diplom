@@ -70,15 +70,17 @@ function ajax() {
   message.loading = "Идет отправка...";
   message.success = "Отправлено";
   message.failure = "Ошибка";
-  let form = document.querySelectorAll('.form');
+  let form = document.querySelectorAll('.form-other');
   let input = document.querySelectorAll('input');
   let statusMessage = document.createElement('div');
   let comment = document.getElementsByTagName('textarea');
   let modals = document.getElementsByClassName('modals')[0];
   let body = document.getElementsByTagName('body')[0];
   let msg = document.querySelectorAll('.msg');
+  let textMessage = document.querySelector('.message');
 
   statusMessage.classList.add('away');
+
   modals.addEventListener('submit', (event) => {
     let target = event.target;
 
@@ -115,6 +117,7 @@ function ajax() {
       for (let i = 0; i < input.length; i++) {
         input[i].value = "";
       }   
+      textMessage.value = '';
   };
 })
 }
@@ -123,34 +126,33 @@ module.exports = ajax;
 },{}],4:[function(require,module,exports){
 function ajaxMsg() {
 
-  let message = new Object();
-  message.loading = "Идет отправка...";
-  message.success = "Отправлено";
-  message.failure = "Ошибка";
-  let form = document.querySelectorAll('.form');
-  let input = document.querySelectorAll('input');
-  let comment = document.getElementsByTagName('textarea');
+  let connect = new Object();
+  connect.loading = "Идет отправка...";
+  connect.success = "Отправлено";
+  connect.failure = "Ошибка";
+  let form = document.querySelector('.ajax-message');
+  let input = form.getElementsByTagName('input'); 
+  let comment = document.querySelector('.comment');
   let modals = document.getElementsByClassName('modals')[0];
   let body = document.getElementsByTagName('body')[0];
-  let msg = document.querySelectorAll('.msg');
-  let statusMessage = document.createElement('div');
+  let statusConnect = document.createElement('div');
+  let inputText = document.querySelector('.input-text');
 
-  statusMessage.classList.add('status');
-	
-  body.addEventListener('submit', (e) => {
-    let target = e.target;
+  statusConnect.classList.add('other-away');
 
-    if (target && target.nodeName == 'FORM') {
-      event.preventDefault();
+  	inputText.addEventListener("input", function() {
+		inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
+	});
 
+	form.addEventListener('submit', function(event) {
+		event.preventDefault();
+		comment.appendChild(statusConnect);
 
-      let request =  new XMLHttpRequest();
-		request.open("POST", "server.php")
+		let request = new XMLHttpRequest();
+		request.open('POST', 'server.php');
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-		let formData = new FormData(body);
-
+		let formData = new FormData(form);
 		request.send(formData);
 
 		request.onreadystatechange = function() {
@@ -158,19 +160,16 @@ function ajaxMsg() {
 				statusConnect.innerHTML = connect.loading;
 			} else if (request.readyState === 4) {
 				if (request.status == 200 && request.status < 300) {
-					statusConnect.innerHTML = connect.success;
-					//Добавляем контент на страницу
+				statusConnect.innerHTML = connect.success;
 				} else {
-					statusConnect.innerHTML = connect.failure;
+				statusConnect.innerHTML = connect.failure;
 				}
 			}
 		}
-		for (let i = 0; i < input.length; i++)
-			 {
-			 	input[i].value = "";
-			 	//Очищаем поля ввода
-			 }
-		};
+
+		for (let i = 0; i < input.length; i++) {
+			input[i].value = ''; 
+		}
 	});
 }
 module.exports = ajaxMsg;
@@ -544,14 +543,14 @@ function showImage() {
     sizesBlock[i].touchstart = function (e) {
       let target = e.target;
 
-      if (target.tagName == "IMG" || target.tagName == "P") {
+      if (target.tagName == "IMG")  {
         target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
         target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
         target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
         target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
         sizeHide[i].style.display = 'none';
       }
-
+      
       if (target.node.nodeName == "DIV") {
         target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
         target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
