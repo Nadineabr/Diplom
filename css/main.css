@@ -908,24 +908,6 @@ h4 {
   margin-top: 6rem;
   background-color: #f7e7e6;
   padding: 3rem 4rem;
-  display: none;
-}
-
-.activeAnwser {
-  margin-top: 6rem;
-  background-color: #f7e7e6;
-  padding: 3rem 4rem;
-  display: block;
-
-}
-.activeAnwser:before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -6rem;
-  border: 3rem solid transparent;
-  border-bottom: 3rem solid #f7e7e6;
 }
 .often-questions .accordion-block:before {
   content: '';
@@ -1746,8 +1728,4 @@ h4 {
     padding: 3rem 3rem;
     width: 25rem;
   }
-  .panel-active {
-  display: block
-}
-
 }
