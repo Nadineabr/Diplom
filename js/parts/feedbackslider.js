@@ -20,6 +20,7 @@ function feedBackSlider() {
 
     slides[slideIndex - 1].style.display = 'block';
   }
+
   showSlides(0);
   setInterval(function () {
     showSlides(slideIndex += 1);
@@ -33,7 +34,9 @@ function feedBackSlider() {
 
   function plusSlides(n) {
     showSlides(slideIndex += n);
-  };
+  }
+
+  ;
 }
 
 module.exports = feedBackSlider;

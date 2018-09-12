@@ -37,30 +37,30 @@ function accordion() {
   let accordionBlock = document.querySelectorAll('.accordion-block');
   let accordion = document.getElementById('accordion');
 
-for (let i=0;i < accordionBlock.length; i++) {
-accordionBlock[i].style.display = 'none';
-}
-accordion.addEventListener('click', (e) => {
-for (let i=0;i < accordionHeading.length; i++) {
-  if (e.target == accordionHeading[i].firstChild){
-    if (accordionHeading[i].classList.contains('ui-accordion-header-active')) {
-      accordionBlock[i].style.display = 'none';
-      accordionHeading[i].classList.remove('ui-accordion-header-active');
-    } else {
-      accordionHeading[i].classList.add("ui-accordion-header-active");
-      for (let x = 0; x < accordionBlock.length; x++) {
-        accordionBlock[x].style.display = 'none';
-        accordionHeading[x].classList.remove('ui-accordion-header-active')
-      }
-
-      accordionBlock[i].style.display = '';
-      accordionHeading[i].classList.add('ui-accordion-header-active')
-    }
+  for (let i = 0; i < accordionBlock.length; i++) {
+    accordionBlock[i].style.display = 'none';
   }
-}
-})
 
+  accordion.addEventListener('click', e => {
+    for (let i = 0; i < accordionHeading.length; i++) {
+      if (e.target == accordionHeading[i].firstChild) {
+        if (accordionHeading[i].classList.contains('ui-accordion-header-active')) {
+          accordionBlock[i].style.display = 'none';
+          accordionHeading[i].classList.remove('ui-accordion-header-active');
+        } else {
+          accordionHeading[i].classList.add("ui-accordion-header-active");
 
+          for (let x = 0; x < accordionBlock.length; x++) {
+            accordionBlock[x].style.display = 'none';
+            accordionHeading[x].classList.remove('ui-accordion-header-active');
+          }
+
+          accordionBlock[i].style.display = '';
+          accordionHeading[i].classList.add('ui-accordion-header-active');
+        }
+      }
+    }
+  });
 }
 
 module.exports = accordion;
@@ -78,100 +78,93 @@ function ajax() {
   let body = document.getElementsByTagName('body')[0];
   let msg = document.querySelectorAll('.msg');
   let textMessage = document.querySelector('.message');
-
   statusMessage.classList.add('away');
-
-  modals.addEventListener('submit', (event) => {
+  modals.addEventListener('submit', event => {
     let target = event.target;
 
     if (target && target.nodeName == 'FORM') {
       event.preventDefault();
-
       msg[+target.className.match(/^\S/)[0]].appendChild(statusMessage);
-
       let request = new XMLHttpRequest();
       request.open("POST", "server.php");
       request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
       let formData = new FormData(form[+target.className.match(/^\S/)[0]]);
-        request.send(formData);
+      request.send(formData);
 
       request.onreadystatechange = () => {
         if (request.readyState < 4) {
           statusMessage.innerHTML = message.loading;
         } else if (request.readyState === 4) {
           if (request.status == 200 && request.status < 300) {
-              for (let i = 0; i < form.length; i++) {
-                form[i].style.display = 'none';
-                statusMessage.innerHTML = message.success;
-              } 
+            for (let i = 0; i < form.length; i++) {
+              form[i].style.display = 'none';
+              statusMessage.innerHTML = message.success;
+            }
           } else {
             for (let i = 0; i < form.length; i++) {
-                form[i].style.display = 'none';
-                statusMessage.innerHTML = message.failure;
-              }
-          }      
+              form[i].style.display = 'none';
+              statusMessage.innerHTML = message.failure;
+            }
+          }
         }
       };
 
       for (let i = 0; i < input.length; i++) {
         input[i].value = "";
-      }   
+      }
+
       textMessage.value = '';
-  };
-})
+    }
+
+    ;
+  });
 }
 
 module.exports = ajax;
 },{}],4:[function(require,module,exports){
 function ajaxMsg() {
-
   let connect = new Object();
   connect.loading = "Идет отправка...";
   connect.success = "Отправлено";
   connect.failure = "Ошибка";
   let form = document.querySelector('.ajax-message');
-  let input = form.getElementsByTagName('input'); 
+  let input = form.getElementsByTagName('input');
   let comment = document.querySelector('.comment');
   let modals = document.getElementsByClassName('modals')[0];
   let body = document.getElementsByTagName('body')[0];
   let statusConnect = document.createElement('div');
   let inputText = document.querySelector('.input-text');
-
   statusConnect.classList.add('other-away');
+  inputText.addEventListener("input", function () {
+    inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
+  });
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    comment.appendChild(statusConnect);
+    let request = new XMLHttpRequest();
+    request.open('POST', 'server.php');
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    let formData = new FormData(form);
+    request.send(formData);
 
-  	inputText.addEventListener("input", function() {
-		inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
-	});
+    request.onreadystatechange = function () {
+      if (request.readyState < 4) {
+        statusConnect.innerHTML = connect.loading;
+      } else if (request.readyState === 4) {
+        if (request.status == 200 && request.status < 300) {
+          statusConnect.innerHTML = connect.success;
+        } else {
+          statusConnect.innerHTML = connect.failure;
+        }
+      }
+    };
 
-	form.addEventListener('submit', function(event) {
-		event.preventDefault();
-		comment.appendChild(statusConnect);
-
-		let request = new XMLHttpRequest();
-		request.open('POST', 'server.php');
-		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-		let formData = new FormData(form);
-		request.send(formData);
-
-		request.onreadystatechange = function() {
-			if (request.readyState < 4) {
-				statusConnect.innerHTML = connect.loading;
-			} else if (request.readyState === 4) {
-				if (request.status == 200 && request.status < 300) {
-				statusConnect.innerHTML = connect.success;
-				} else {
-				statusConnect.innerHTML = connect.failure;
-				}
-			}
-		}
-
-		for (let i = 0; i < input.length; i++) {
-			input[i].value = ''; 
-		}
-	});
+    for (let i = 0; i < input.length; i++) {
+      input[i].value = '';
+    }
+  });
 }
+
 module.exports = ajaxMsg;
 },{}],5:[function(require,module,exports){
 function burger() {
@@ -220,7 +213,6 @@ function calc() {
       materialSum = 0,
       total = 0;
   totalValue.innerHTML = "Для  расчета нужно выбрать размер картины и материал картины";
-  
   size.addEventListener('change', function () {
     sizeSum = +this.options[this.selectedIndex].value;
     total = (materialSum + sizeSum) * optSum;
@@ -310,6 +302,7 @@ function feedBackSlider() {
 
     slides[slideIndex - 1].style.display = 'block';
   }
+
   showSlides(0);
   setInterval(function () {
     showSlides(slideIndex += 1);
@@ -323,7 +316,9 @@ function feedBackSlider() {
 
   function plusSlides(n) {
     showSlides(slideIndex += n);
-  };
+  }
+
+  ;
 }
 
 module.exports = feedBackSlider;
@@ -438,7 +433,6 @@ function popup() {
       form = document.querySelectorAll('.form'),
       msg = document.querySelectorAll('.msg');
 
-
   for (let i = 0; i < designBtn.length; i++) {
     designBtn[i].addEventListener('click', () => {
       popupDesign.style.display = 'flex';
@@ -446,7 +440,7 @@ function popup() {
     });
   }
 
-  body.addEventListener('click', (e) => {
+  body.addEventListener('click', e => {
     let target = e.target;
 
     if (target.className == 'popup-close' || target.className == 'popup-consultation' || target.className == 'popup-design' || target.className == 'popup-gift') {
@@ -454,19 +448,19 @@ function popup() {
       popupConsult.style.display = 'none';
       popupGift.style.display = 'none';
       document.body.style.overflow = '';
-      
-      for (let i=0; i<form.length; i++ ) {
-          form[i].style.display = 'block';
-          if (!!document.querySelectorAll('.away')[i]) {
-        document.querySelectorAll('.away')[i].remove();
+
+      for (let i = 0; i < form.length; i++) {
+        form[i].style.display = 'block';
+
+        if (!!document.querySelectorAll('.away')[i]) {
+          document.querySelectorAll('.away')[i].remove();
+        }
       }
-      }
-      
     }
 
     if (target.classList.contains('button-consultation')) {
-      popupConsult.style.display = 'flex'; 
-      document.body.style.overflow = 'hidden'
+      popupConsult.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
   });
 
@@ -479,33 +473,29 @@ function popup() {
 
   body.addEventListener('input', () => {
     for (let i = 0; i < nameDesign.length; i++) {
-    nameDesign[i].value = nameDesign[i].value.replace(/[^А-ЯЁа-яё ]/, '');
-
+      nameDesign[i].value = nameDesign[i].value.replace(/[^А-ЯЁа-яё ]/, '');
     }
   });
-
   body.addEventListener('input', () => {
     for (let i = 0; i < commentDesign.length; i++) {
-    commentDesign[i].value = commentDesign[i].value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
+      commentDesign[i].value = commentDesign[i].value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
     }
   });
-
   body.addEventListener("input", function () {
-    for(let i = 0; i < phoneDesign.length; i++) {
-       let mask = '+_ (___) ___ ____',
-        str = phoneDesign[i].value.replace(/\D/g, ''),
-        x = 0;
-    phoneDesign[i].value = mask.replace(/./g, function (input) {
-      if (/[_\d]/.test(input) && x < str.length) {
-        return str.charAt(x++);
-      } else if (x >= str.length) {
-        return '';
-      } else {
-        return input;
-      }
-    });
+    for (let i = 0; i < phoneDesign.length; i++) {
+      let mask = '+_ (___) ___ ____',
+          str = phoneDesign[i].value.replace(/\D/g, ''),
+          x = 0;
+      phoneDesign[i].value = mask.replace(/./g, function (input) {
+        if (/[_\d]/.test(input) && x < str.length) {
+          return str.charAt(x++);
+        } else if (x >= str.length) {
+          return '';
+        } else {
+          return input;
+        }
+      });
     }
-   
   });
 }
 
@@ -543,14 +533,14 @@ function showImage() {
     sizesBlock[i].touchstart = function (e) {
       let target = e.target;
 
-      if (target.tagName == "IMG")  {
+      if (target.tagName == "IMG") {
         target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
         target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
         target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
         target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
         sizeHide[i].style.display = 'none';
       }
-      
+
       if (target.node.nodeName == "DIV") {
         target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
         target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
@@ -559,7 +549,9 @@ function showImage() {
         sizeHide[i].style.display = 'block';
       }
     };
-  };
+  }
+
+  ;
 }
 
 module.exports = showImage;
@@ -595,7 +587,8 @@ function topSlider() {
 
     slides[slideIndex - 1].style.display = 'block';
   }
-showSlides(0);
+
+  showSlides(0);
   setInterval(function () {
     showSlides(slideIndex += 1);
   }, 5000);

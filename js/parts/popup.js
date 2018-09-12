@@ -13,7 +13,6 @@ function popup() {
       form = document.querySelectorAll('.form'),
       msg = document.querySelectorAll('.msg');
 
-
   for (let i = 0; i < designBtn.length; i++) {
     designBtn[i].addEventListener('click', () => {
       popupDesign.style.display = 'flex';
@@ -21,7 +20,7 @@ function popup() {
     });
   }
 
-  body.addEventListener('click', (e) => {
+  body.addEventListener('click', e => {
     let target = e.target;
 
     if (target.className == 'popup-close' || target.className == 'popup-consultation' || target.className == 'popup-design' || target.className == 'popup-gift') {
@@ -29,19 +28,19 @@ function popup() {
       popupConsult.style.display = 'none';
       popupGift.style.display = 'none';
       document.body.style.overflow = '';
-      
-      for (let i=0; i<form.length; i++ ) {
-          form[i].style.display = 'block';
-          if (!!document.querySelectorAll('.away')[i]) {
-        document.querySelectorAll('.away')[i].remove();
+
+      for (let i = 0; i < form.length; i++) {
+        form[i].style.display = 'block';
+
+        if (!!document.querySelectorAll('.away')[i]) {
+          document.querySelectorAll('.away')[i].remove();
+        }
       }
-      }
-      
     }
 
     if (target.classList.contains('button-consultation')) {
-      popupConsult.style.display = 'flex'; 
-      document.body.style.overflow = 'hidden'
+      popupConsult.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
   });
 
@@ -54,33 +53,29 @@ function popup() {
 
   body.addEventListener('input', () => {
     for (let i = 0; i < nameDesign.length; i++) {
-    nameDesign[i].value = nameDesign[i].value.replace(/[^А-ЯЁа-яё ]/, '');
-
+      nameDesign[i].value = nameDesign[i].value.replace(/[^А-ЯЁа-яё ]/, '');
     }
   });
-
   body.addEventListener('input', () => {
     for (let i = 0; i < commentDesign.length; i++) {
-    commentDesign[i].value = commentDesign[i].value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
+      commentDesign[i].value = commentDesign[i].value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
     }
   });
-
   body.addEventListener("input", function () {
-    for(let i = 0; i < phoneDesign.length; i++) {
-       let mask = '+_ (___) ___ ____',
-        str = phoneDesign[i].value.replace(/\D/g, ''),
-        x = 0;
-    phoneDesign[i].value = mask.replace(/./g, function (input) {
-      if (/[_\d]/.test(input) && x < str.length) {
-        return str.charAt(x++);
-      } else if (x >= str.length) {
-        return '';
-      } else {
-        return input;
-      }
-    });
+    for (let i = 0; i < phoneDesign.length; i++) {
+      let mask = '+_ (___) ___ ____',
+          str = phoneDesign[i].value.replace(/\D/g, ''),
+          x = 0;
+      phoneDesign[i].value = mask.replace(/./g, function (input) {
+        if (/[_\d]/.test(input) && x < str.length) {
+          return str.charAt(x++);
+        } else if (x >= str.length) {
+          return '';
+        } else {
+          return input;
+        }
+      });
     }
-   
   });
 }
 

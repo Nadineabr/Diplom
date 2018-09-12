@@ -17,7 +17,8 @@ function topSlider() {
 
     slides[slideIndex - 1].style.display = 'block';
   }
-showSlides(0);
+
+  showSlides(0);
   setInterval(function () {
     showSlides(slideIndex += 1);
   }, 5000);

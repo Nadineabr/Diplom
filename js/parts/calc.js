@@ -9,7 +9,6 @@ function calc() {
       materialSum = 0,
       total = 0;
   totalValue.innerHTML = "Для  расчета нужно выбрать размер картины и материал картины";
-  
   size.addEventListener('change', function () {
     sizeSum = +this.options[this.selectedIndex].value;
     total = (materialSum + sizeSum) * optSum;
