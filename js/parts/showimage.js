@@ -1,54 +1,36 @@
 function showImage() {
-  let sizesBlock = document.querySelectorAll('.sizes-block');
-  let sizeHide = document.querySelectorAll('.size-hide');
+  let sizeWrapper = document.querySelector('.sizes-wrapper'),
+      img = document.getElementsByClassName('image'),
+      sizeHide = document.getElementsByClassName('size-hide');
+  sizeWrapper.addEventListener('mouseover', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}-1.png`);
+      sizeHide[index - 1].style.display = 'none';
+    }
+  });
+  sizeWrapper.addEventListener('mouseout', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}.png`);
+      sizeHide[index - 1].style.display = 'block';
+    }
+  });
+  sizeWrapper.addEventListener('touchstart', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}-1.png`);
+      sizeHide[index - 1].style.display = 'none';
+    }
 
-  for (let i = 0; i < sizesBlock.length; i++) {
-    sizesBlock[i].onmouseover = function (e) {
-      let target = e.target;
-
-      if (target && target.nodeName == "IMG") {
-        target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
-        target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
-        target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
-        target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
-        sizeHide[i].style.display = 'none';
-      }
-    };
-
-    sizesBlock[i].onmouseout = function (e) {
-      let target = e.target;
-
-      if (target && target.nodeName == "IMG") {
-        target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
-        target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
-        target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
-        target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
+    if (e.target && e.target.classList.contains('sizes-wrapper')) {
+      for (let i = 0; i < img.length; i++) {
+        img[i].setAttribute('src', `img/sizes-${i + 1}.png`);
+        img[i].style.display = 'block';
         sizeHide[i].style.display = 'block';
       }
-    };
-
-    sizesBlock[i].touchstart = function (e) {
-      let target = e.target;
-
-      if (target.tagName == "IMG") {
-        target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
-        target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
-        target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
-        target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
-        sizeHide[i].style.display = 'none';
-      }
-
-      if (target.node.nodeName == "DIV") {
-        target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
-        target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
-        target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
-        target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
-        sizeHide[i].style.display = 'block';
-      }
-    };
-  }
-
-  ;
+    }
+  });
 }
 
 module.exports = showImage;

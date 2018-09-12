@@ -4,14 +4,7 @@ function ajax() {
   message.success = "Отправлено";
   message.failure = "Ошибка";
   let form = document.querySelectorAll('.form-other');
-  let input = document.querySelectorAll('input');
-  let statusMessage = document.createElement('div');
-  let comment = document.getElementsByTagName('textarea');
-  let modals = document.getElementsByClassName('modals')[0];
-  let body = document.getElementsByTagName('body')[0];
-  let msg = document.querySelectorAll('.msg');
-  let textMessage = document.querySelector('.message');
-  statusMessage.classList.add('away');
+  input = document.querySelectorAll('input'), statusMessage = document.createElement('div'), modals = document.getElementsByClassName('modals')[0], msg = document.querySelectorAll('.msg'), textMessage = document.querySelector('.message'), statusMessage.classList.add('away');
   modals.addEventListener('submit', event => {
     let target = event.target;
 

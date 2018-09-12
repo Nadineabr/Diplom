@@ -18,7 +18,9 @@ function calc() {
     } else {
       totalValue.innerHTML = total;
     }
+  });
 
+  function promo() {
     if (promocode.value == "IWANTPOPART") {
       totalValue.innerHTML = totalValue.innerHTML * 0.7;
     } else if (material.value == 0 || size.value == 0) {
@@ -26,7 +28,8 @@ function calc() {
     } else {
       totalValue.innerHTML = total;
     }
-  });
+  }
+
   material.addEventListener('change', function () {
     materialSum = +this.options[this.selectedIndex].value;
     total = (materialSum + sizeSum) * optSum;
@@ -37,13 +40,7 @@ function calc() {
       totalValue.innerHTML = total;
     }
 
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
   opt.addEventListener('change', function () {
     optSum = +this.options[this.selectedIndex].value;
@@ -55,22 +52,10 @@ function calc() {
       totalValue.innerHTML = total;
     }
 
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
   promocode.addEventListener('change', function () {
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
 }
 

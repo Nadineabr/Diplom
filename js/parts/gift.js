@@ -4,11 +4,11 @@ function gift() {
       gift = document.querySelector('.fixed-gift'),
       body = document.getElementsByTagName('body')[0];
   let currentCount = 0;
-  body.addEventListener('click', e => {
-    if (e.target.tagName == "BUTTON" || e.target == popupGift) currentCount++;
+  body.addEventListener('click', function (e) {
+    if (e.target.tagName == "BUTTON" || e.target.className == 'popup-gift') currentCount++;
   }); //пользователь долистал до конца страницы и никуда не кликнул
 
-  document.addEventListener('scroll', event => {
+  document.addEventListener('scroll', function (e) {
     const endScrollTop = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
     if (endScrollTop === document.documentElement.scrollTop && currentCount == 0) {

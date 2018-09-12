@@ -4,12 +4,7 @@ function ajaxMsg() {
   connect.success = "Отправлено";
   connect.failure = "Ошибка";
   let form = document.querySelector('.ajax-message');
-  let input = form.getElementsByTagName('input');
-  let comment = document.querySelector('.comment');
-  let modals = document.getElementsByClassName('modals')[0];
-  let body = document.getElementsByTagName('body')[0];
-  let statusConnect = document.createElement('div');
-  let inputText = document.querySelector('.input-text');
+  input = form.getElementsByTagName('input'), comment = document.querySelector('.comment'), statusConnect = document.createElement('div'), inputText = document.querySelector('.input-text');
   statusConnect.classList.add('other-away');
   inputText.addEventListener("input", function () {
     inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');

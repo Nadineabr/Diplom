@@ -1,8 +1,8 @@
 //accordion
 function accordion() {
-  let accordionHeading = document.querySelectorAll('.accordion-heading');
-  let accordionBlock = document.querySelectorAll('.accordion-block');
-  let accordion = document.getElementById('accordion');
+  let accordionHeading = document.querySelectorAll('.accordion-heading'),
+      accordionBlock = document.querySelectorAll('.accordion-block'),
+      accordion = document.getElementById('accordion');
 
   for (let i = 0; i < accordionBlock.length; i++) {
     accordionBlock[i].style.display = 'none';

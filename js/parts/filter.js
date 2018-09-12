@@ -1,11 +1,8 @@
 function filter() {
-  let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0];
-  let portfolioWrapper = document.getElementsByClassName('portfolio-wrapper');
-  let portfolioBlock = document.querySelectorAll('.image');
-  let allBtn = document.getElementsByClassName('all active')[0];
-  let post = document.getElementsByClassName('post');
-  let noImg = document.querySelector('.no-img');
-  portfolioMenu.addEventListener('click', e => {
+  let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0],
+      portfolioBlock = document.querySelectorAll('.image'),
+      noImg = document.querySelector('.no-img');
+  portfolioMenu.addEventListener('click', function (e) {
     let target = e.target;
 
     if (target && target.nodeName == 'LI') {

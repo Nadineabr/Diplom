@@ -33,9 +33,9 @@ timemodal();
 },{"../parts/accordion.js":2,"../parts/ajax.js":3,"../parts/ajaxMsg.js":4,"../parts/burger.js":5,"../parts/calc.js":6,"../parts/feedbackslider.js":7,"../parts/filter.js":8,"../parts/gift.js":9,"../parts/moreposts.js":10,"../parts/popup.js":11,"../parts/showimage.js":12,"../parts/timemodal.js":13,"../parts/topslider.js":14}],2:[function(require,module,exports){
 //accordion
 function accordion() {
-  let accordionHeading = document.querySelectorAll('.accordion-heading');
-  let accordionBlock = document.querySelectorAll('.accordion-block');
-  let accordion = document.getElementById('accordion');
+  let accordionHeading = document.querySelectorAll('.accordion-heading'),
+      accordionBlock = document.querySelectorAll('.accordion-block'),
+      accordion = document.getElementById('accordion');
 
   for (let i = 0; i < accordionBlock.length; i++) {
     accordionBlock[i].style.display = 'none';
@@ -71,14 +71,7 @@ function ajax() {
   message.success = "Отправлено";
   message.failure = "Ошибка";
   let form = document.querySelectorAll('.form-other');
-  let input = document.querySelectorAll('input');
-  let statusMessage = document.createElement('div');
-  let comment = document.getElementsByTagName('textarea');
-  let modals = document.getElementsByClassName('modals')[0];
-  let body = document.getElementsByTagName('body')[0];
-  let msg = document.querySelectorAll('.msg');
-  let textMessage = document.querySelector('.message');
-  statusMessage.classList.add('away');
+  input = document.querySelectorAll('input'), statusMessage = document.createElement('div'), modals = document.getElementsByClassName('modals')[0], msg = document.querySelectorAll('.msg'), textMessage = document.querySelector('.message'), statusMessage.classList.add('away');
   modals.addEventListener('submit', event => {
     let target = event.target;
 
@@ -128,12 +121,7 @@ function ajaxMsg() {
   connect.success = "Отправлено";
   connect.failure = "Ошибка";
   let form = document.querySelector('.ajax-message');
-  let input = form.getElementsByTagName('input');
-  let comment = document.querySelector('.comment');
-  let modals = document.getElementsByClassName('modals')[0];
-  let body = document.getElementsByTagName('body')[0];
-  let statusConnect = document.createElement('div');
-  let inputText = document.querySelector('.input-text');
+  input = form.getElementsByTagName('input'), comment = document.querySelector('.comment'), statusConnect = document.createElement('div'), inputText = document.querySelector('.input-text');
   statusConnect.classList.add('other-away');
   inputText.addEventListener("input", function () {
     inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
@@ -170,32 +158,24 @@ module.exports = ajaxMsg;
 function burger() {
   let burgerBtn = document.querySelector('.burger');
   let burgerMenu = document.querySelector('.burger-menu');
-  let width = document.body.clientWidth;
-  burgerBtn.addEventListener('click', e => {
-    if (width <= 768) {
-      burgerMenu.style.display = "block";
 
-      if (e.target == burgerBtn && burgerMenu.style.display == "block") {
-        burgerMenu.style.display = "none";
-      } else {
-        burgerMenu.style.display = "block";
-      }
-    }
-  });
-  burgerBtn.addEventListener('touchstart', e => {
-    if (width <= 768) {
-      burgerMenu.style.display = "block";
+  if (window.innerWidth > 768) {
+    burgerBtn.style.display = 'none';
+  }
 
-      if (e.target == burgerBtn && burgerMenu.style.display == "block") {
-        burgerMenu.style.display = "none";
+  burgerBtn.addEventListener('click', function (event) {
+    if (window.innerWidth <= 768) {
+      if (event.target.className == 'burgerBtn' && burgerMenu.style.display == 'block') {
+        burgerMenu.style.display = 'none';
       } else {
-        burgerMenu.style.display = "block";
+        burgerMenu.style.display = 'block';
       }
     }
   });
   window.addEventListener('resize', function (event) {
-    if (window.innerWidth > 769) {
+    if (window.innerWidth > 768) {
       burgerMenu.style.display = 'none';
+      burgerBtn.style.display = 'none';
     }
   });
 }
@@ -222,7 +202,9 @@ function calc() {
     } else {
       totalValue.innerHTML = total;
     }
+  });
 
+  function promo() {
     if (promocode.value == "IWANTPOPART") {
       totalValue.innerHTML = totalValue.innerHTML * 0.7;
     } else if (material.value == 0 || size.value == 0) {
@@ -230,7 +212,8 @@ function calc() {
     } else {
       totalValue.innerHTML = total;
     }
-  });
+  }
+
   material.addEventListener('change', function () {
     materialSum = +this.options[this.selectedIndex].value;
     total = (materialSum + sizeSum) * optSum;
@@ -241,13 +224,7 @@ function calc() {
       totalValue.innerHTML = total;
     }
 
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
   opt.addEventListener('change', function () {
     optSum = +this.options[this.selectedIndex].value;
@@ -259,22 +236,10 @@ function calc() {
       totalValue.innerHTML = total;
     }
 
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
   promocode.addEventListener('change', function () {
-    if (promocode.value == "IWANTPOPART") {
-      totalValue.innerHTML = totalValue.innerHTML * 0.7;
-    } else if (material.value == 0 || size.value == 0) {
-      totalValue.innerHTML = 0;
-    } else {
-      totalValue.innerHTML = total;
-    }
+    promo();
   });
 }
 
@@ -324,13 +289,10 @@ function feedBackSlider() {
 module.exports = feedBackSlider;
 },{}],8:[function(require,module,exports){
 function filter() {
-  let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0];
-  let portfolioWrapper = document.getElementsByClassName('portfolio-wrapper');
-  let portfolioBlock = document.querySelectorAll('.image');
-  let allBtn = document.getElementsByClassName('all active')[0];
-  let post = document.getElementsByClassName('post');
-  let noImg = document.querySelector('.no-img');
-  portfolioMenu.addEventListener('click', e => {
+  let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0],
+      portfolioBlock = document.querySelectorAll('.image'),
+      noImg = document.querySelector('.no-img');
+  portfolioMenu.addEventListener('click', function (e) {
     let target = e.target;
 
     if (target && target.nodeName == 'LI') {
@@ -378,11 +340,11 @@ function gift() {
       gift = document.querySelector('.fixed-gift'),
       body = document.getElementsByTagName('body')[0];
   let currentCount = 0;
-  body.addEventListener('click', e => {
-    if (e.target.tagName == "BUTTON" || e.target == popupGift) currentCount++;
+  body.addEventListener('click', function (e) {
+    if (e.target.tagName == "BUTTON" || e.target.className == 'popup-gift') currentCount++;
   }); //пользователь долистал до конца страницы и никуда не кликнул
 
-  document.addEventListener('scroll', event => {
+  document.addEventListener('scroll', function (e) {
     const endScrollTop = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
     if (endScrollTop === document.documentElement.scrollTop && currentCount == 0) {
@@ -396,23 +358,14 @@ function gift() {
 module.exports = gift;
 },{}],10:[function(require,module,exports){
 function morePosts() {
-  let moreStyles = document.getElementsByClassName('button-styles')[0];
-  let stylesBlock = document.getElementsByClassName('styles-block');
-  let newBlocks = document.querySelectorAll('.styles-2');
-  let statusPosts = document.createElement('div');
-  let styles = document.getElementsByClassName('styles');
-  moreStyles.addEventListener('click', event => {
-    let target = event.target;
-
-    if (target && target.nodeName == 'BUTTON') {
-      event.preventDefault();
-      target.appendChild(statusPosts);
-      newBlocks.forEach(element => {
-        element.classList.remove("hidden-lg", "hidden-md", "hidden-sm", "hidden-xs", "styles-2");
-        element.classList.add("col-sm-3", "col-sm-offset-0", "col-xs-10", "col-xs-offset-1");
-      });
-      moreStyles.style.display = 'none';
+  let moreStyles = document.querySelector('.button-transparent'),
+      newBlocks = document.querySelectorAll('.styles-2');
+  moreStyles.addEventListener('click', function () {
+    for (let i = 0; i < newBlocks.length; i++) {
+      newBlocks[i].className = 'col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 styles-2';
     }
+
+    this.style.display = 'none';
   });
 }
 
@@ -502,56 +455,38 @@ function popup() {
 module.exports = popup;
 },{}],12:[function(require,module,exports){
 function showImage() {
-  let sizesBlock = document.querySelectorAll('.sizes-block');
-  let sizeHide = document.querySelectorAll('.size-hide');
+  let sizeWrapper = document.querySelector('.sizes-wrapper'),
+      img = document.getElementsByClassName('image'),
+      sizeHide = document.getElementsByClassName('size-hide');
+  sizeWrapper.addEventListener('mouseover', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}-1.png`);
+      sizeHide[index - 1].style.display = 'none';
+    }
+  });
+  sizeWrapper.addEventListener('mouseout', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}.png`);
+      sizeHide[index - 1].style.display = 'block';
+    }
+  });
+  sizeWrapper.addEventListener('touchstart', function (e) {
+    if (e.target && e.target.classList.contains('image')) {
+      let index = e.target.className.substring(5, 6);
+      e.target.setAttribute('src', `img/sizes-${index}-1.png`);
+      sizeHide[index - 1].style.display = 'none';
+    }
 
-  for (let i = 0; i < sizesBlock.length; i++) {
-    sizesBlock[i].onmouseover = function (e) {
-      let target = e.target;
-
-      if (target && target.nodeName == "IMG") {
-        target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
-        target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
-        target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
-        target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
-        sizeHide[i].style.display = 'none';
-      }
-    };
-
-    sizesBlock[i].onmouseout = function (e) {
-      let target = e.target;
-
-      if (target && target.nodeName == "IMG") {
-        target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
-        target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
-        target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
-        target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
+    if (e.target && e.target.classList.contains('sizes-wrapper')) {
+      for (let i = 0; i < img.length; i++) {
+        img[i].setAttribute('src', `img/sizes-${i + 1}.png`);
+        img[i].style.display = 'block';
         sizeHide[i].style.display = 'block';
       }
-    };
-
-    sizesBlock[i].touchstart = function (e) {
-      let target = e.target;
-
-      if (target.tagName == "IMG") {
-        target.src = target.src.replace('img/sizes-1.png', 'img/sizes-1-1.png');
-        target.src = target.src.replace('img/sizes-2.png', 'img/sizes-2-1.png');
-        target.src = target.src.replace('img/sizes-3.png', 'img/sizes-3-1.png');
-        target.src = target.src.replace('img/sizes-4.png', 'img/sizes-4-1.png');
-        sizeHide[i].style.display = 'none';
-      }
-
-      if (target.node.nodeName == "DIV") {
-        target.src = target.src.replace('img/sizes-1-1.png', 'img/sizes-1.png');
-        target.src = target.src.replace('img/sizes-2-1.png', 'img/sizes-2.png');
-        target.src = target.src.replace('img/sizes-3-1.png', 'img/sizes-3.png');
-        target.src = target.src.replace('img/sizes-4-1.png', 'img/sizes-4.png');
-        sizeHide[i].style.display = 'block';
-      }
-    };
-  }
-
-  ;
+    }
+  });
 }
 
 module.exports = showImage;
