@@ -1,5 +1,7 @@
+"use strict";
+
 function topSlider() {
-  let slideIndex = 1,
+  var slideIndex = 1,
       slides = document.getElementsByClassName('main-slider-item');
 
   function showSlides(n) {
@@ -11,7 +13,7 @@ function topSlider() {
       slideIndex = slides.length;
     }
 
-    for (let i = 0; i < slides.length; i++) {
+    for (var i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
     }
 

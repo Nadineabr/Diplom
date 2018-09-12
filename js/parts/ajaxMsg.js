@@ -1,10 +1,17 @@
+"use strict";
+
+require("core-js/modules/es6.regexp.replace");
+
 function ajaxMsg() {
-  let connect = new Object();
+  var connect = new Object();
   connect.loading = "Идет отправка...";
   connect.success = "Отправлено";
   connect.failure = "Ошибка";
-  let form = document.querySelector('.ajax-message');
-  input = form.getElementsByTagName('input'), comment = document.querySelector('.comment'), statusConnect = document.createElement('div'), inputText = document.querySelector('.input-text');
+  var form = document.querySelector('.ajax-message'),
+  input = form.getElementsByTagName('input'), 
+  comment = document.querySelector('.comment'), 
+  statusConnect = document.createElement('div'), 
+  inputText = document.querySelector('.input-text');
   statusConnect.classList.add('other-away');
   inputText.addEventListener("input", function () {
     inputText.value = inputText.value.replace(/[^А-ЯЁа-яё ?,.()]/, '');
@@ -12,10 +19,10 @@ function ajaxMsg() {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     comment.appendChild(statusConnect);
-    let request = new XMLHttpRequest();
+    var request = new XMLHttpRequest();
     request.open('POST', 'server.php');
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    let formData = new FormData(form);
+    var formData = new FormData(form);
     request.send(formData);
 
     request.onreadystatechange = function () {
@@ -30,7 +37,7 @@ function ajaxMsg() {
       }
     };
 
-    for (let i = 0; i < input.length; i++) {
+    for (var i = 0; i < input.length; i++) {
       input[i].value = '';
     }
   });

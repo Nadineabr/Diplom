@@ -1,6 +1,8 @@
+"use strict";
+
 //down slider
 function feedBackSlider() {
-  let slideIndex = 1,
+  var slideIndex = 1,
       slides = document.getElementsByClassName('feedback-slider-item'),
       prev = document.querySelector('.main-prev-btn'),
       next = document.querySelector('.main-next-btn');
@@ -14,7 +16,7 @@ function feedBackSlider() {
       slideIndex = slides.length;
     }
 
-    for (let i = 0; i < slides.length; i++) {
+    for (var i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
     }
 

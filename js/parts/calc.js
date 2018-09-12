@@ -1,5 +1,7 @@
+"use strict";
+
 function calc() {
-  let size = document.getElementById('size'),
+  var size = document.getElementById('size'),
       material = document.getElementById('material'),
       opt = document.getElementById('options'),
       totalValue = document.getElementsByClassName('calc-price')[0],

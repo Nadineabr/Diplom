@@ -1,13 +1,19 @@
+"use strict";
+
+require("core-js/modules/es6.regexp.match");
+
+require("core-js/modules/es6.regexp.replace");
+
 function filter() {
-  let portfolioMenu = document.getElementsByClassName('portfolio-menu')[0],
+  var portfolioMenu = document.getElementsByClassName('portfolio-menu')[0],
       portfolioBlock = document.querySelectorAll('.image'),
       noImg = document.querySelector('.no-img');
   portfolioMenu.addEventListener('click', function (e) {
-    let target = e.target;
+    var target = e.target;
 
     if (target && target.nodeName == 'LI') {
-      for (let i = 0; i < portfolioMenu.childNodes.length; i++) {
-        let activeFrame = portfolioMenu.childNodes[i];
+      for (var i = 0; i < portfolioMenu.childNodes.length; i++) {
+        var activeFrame = portfolioMenu.childNodes[i];
 
         if (activeFrame.className) {
           activeFrame.className = activeFrame.className.replace(/(?:^|\s)active(?!\S)/, '');
@@ -18,13 +24,13 @@ function filter() {
     }
 
     if (!target.classList.contains("all")) {
-      for (let i = 0; i < portfolioBlock.length; i++) {
-        let activeImg = portfolioBlock[i].getAttribute('class');
+      for (var _i = 0; _i < portfolioBlock.length; _i++) {
+        var activeImg = portfolioBlock[_i].getAttribute('class');
 
-        if (`${activeImg.match(/^\S+\s/)}` == `${target.className.match(/^\S+\s/)}`) {
-          portfolioBlock[i].className = portfolioBlock[i].className.replace(/(?:^|\s)portfolio-no(?!\S)/, ' portfolio-block');
+        if ("".concat(activeImg.match(/^\S+\s/)) == "".concat(target.className.match(/^\S+\s/))) {
+          portfolioBlock[_i].className = portfolioBlock[_i].className.replace(/(?:^|\s)portfolio-no(?!\S)/, ' portfolio-block');
         } else {
-          portfolioBlock[i].className = portfolioBlock[i].className.replace(/(?:^|\s)portfolio-block(?!\S)/, ' portfolio-no');
+          portfolioBlock[_i].className = portfolioBlock[_i].className.replace(/(?:^|\s)portfolio-block(?!\S)/, ' portfolio-no');
         }
       }
 
@@ -34,8 +40,8 @@ function filter() {
         noImg.style.display = "none";
       }
     } else {
-      for (let i = 0; i < portfolioBlock.length; i++) {
-        portfolioBlock[i].className = portfolioBlock[i].className.replace(/(?:^|\s)portfolio-no(?!\S)/, ' portfolio-block');
+      for (var _i2 = 0; _i2 < portfolioBlock.length; _i2++) {
+        portfolioBlock[_i2].className = portfolioBlock[_i2].className.replace(/(?:^|\s)portfolio-no(?!\S)/, ' portfolio-block');
         noImg.style.display = "none";
       }
     }
